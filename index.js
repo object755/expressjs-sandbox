@@ -52,6 +52,4 @@ function testPost() {
         .catch(error => console.error("Error:", error))
 }
 
-// Wrap the testPost function inside a DOMContentLoaded event listener
-
 startApp()
