@@ -3,12 +3,16 @@ import mongoose from 'mongoose'
 import router from './router.js'
 import fileUpload from 'express-fileupload'
 import { CREDENTIALS } from './credentials.js'
+import { pilotsManager } from './pilotsManager.js'
 
 const PORT = 5555;
+let dbName = `Dapplication`
 
 // creates path to db parent
-const DB_URL = `mongodb+srv://${CREDENTIALS.username}:${CREDENTIALS.password}@clustereu.wcfbshc.mongodb.net/drift_data`;
+const DB_URL = `mongodb+srv://${CREDENTIALS.username}:${CREDENTIALS.password}@clustereu.wcfbshc.mongodb.net/${dbName}`;
 const API_PILOTS_URL = `http://localhost:${PORT}/api/pilots`;
+
+// console.log(pilotsManager)
 
 const app = express();
 
@@ -25,19 +29,34 @@ async function startApp() {
     try {
         await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
         app.listen(PORT, () => console.log(`[Server is working]:[Port:${PORT}]`));
-        // testPost();
+        // postAllKnownPilotsToDataBase()
     } catch(e) {
         console.log(e);
     }
 }
 
-function testPost() {
+function postAllKnownPilotsToDataBase() {
+    Object.entries(pilotsManager).forEach(pilot => {
+        console.log(pilot.country)
+        let [pilotName, pilotData] = pilot;
+
+        let {country, city, socials} = pilotData
+        
+        postPilotData(pilotName, country, city, socials)
+        
+        // console.log(`${country} ${city} ${socials}`)
+    })
+}
+
+function postPilotData(pilotName, country, city, social, avatar = '') {
     const url = API_PILOTS_URL;
+
     const data = {
-        pilot: "Test Pilot",
-        vehicle: "test vehicle",
-        country: "test country",
-        avatar: "test avatar",
+        pilotName: pilotName,
+        country: city,
+        country: country,
+        social: social,
+        avatar: avatar,
     };
 
     fetch(url, {
