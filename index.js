@@ -1,18 +1,16 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import router from './router.js'
+import { PORT, DB_URL, POST_ALL_PROFILES_PATH, GET_API_URL } from './serverData.js'
 import fileUpload from 'express-fileupload'
-import { CREDENTIALS } from './credentials.js'
 import { pilotsManager } from './pilotsManager.js'
 
-const PORT = 5555;
-let dbName = `Dapplication`
+// const PORT = 5555;
+// let dbName = `Dapplication`
 
-// creates path to db parent
-const DB_URL = `mongodb+srv://${CREDENTIALS.username}:${CREDENTIALS.password}@clustereu.wcfbshc.mongodb.net/${dbName}`;
-const API_PILOTS_URL = `http://localhost:${PORT}/api/pilots`;
-
-// console.log(pilotsManager)
+// // creates path to db parent
+// const DB_URL = `mongodb+srv://${CREDENTIALS.username}:${CREDENTIALS.password}@clustereu.wcfbshc.mongodb.net/${dbName}`;
+// const API_PILOTS_URL = `http://localhost:${PORT}/api/pilots`;
 
 const app = express();
 
@@ -29,28 +27,27 @@ async function startApp() {
     try {
         await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
         app.listen(PORT, () => console.log(`[Server is working]:[Port:${PORT}]`));
-        // postAllKnownPilotsToDataBase()
+
+        let urlForAllProfilesPosting = GET_API_URL(PORT,POST_ALL_PROFILES_PATH)
+        postAllKnownProfilesToDataBase(urlForAllProfilesPosting)
     } catch(e) {
         console.log(e);
     }
 }
 
-function postAllKnownPilotsToDataBase() {
+function postAllKnownProfilesToDataBase(url) {
     Object.entries(pilotsManager).forEach(pilot => {
-        console.log(pilot.country)
         let [pilotName, pilotData] = pilot;
 
         let {country, city, socials} = pilotData
         
-        postPilotData(pilotName, country, city, socials)
+        postPilotData(url, pilotName, country, city, socials)
         
-        // console.log(`${country} ${city} ${socials}`)
+        console.log(`${country} ${city} ${socials}`)
     })
 }
 
-function postPilotData(pilotName, country, city, social, avatar = '') {
-    const url = API_PILOTS_URL;
-
+function postPilotData(url, pilotName, country, city, social, avatar = '') {
     const data = {
         pilotName: pilotName,
         country: city,
