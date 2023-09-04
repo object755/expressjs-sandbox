@@ -19,10 +19,6 @@ async function startApp() {
     try {
         await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
         app.listen(PORT, () => console.log(`[Server is working]:[Port:${PORT}]`));
-
-        let urlForAllProfilesPosting = GET_API_URL(PORT,POST_ALL_PROFILES_PATH);
-
-        console.log(urlForAllProfilesPosting);
     } catch(e) {
         console.log(e);
     }

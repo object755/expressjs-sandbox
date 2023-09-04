@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {dbCollectionName} from './serverData.js';
 
 const Post = new mongoose.Schema({
     pilotName: {type: String, required: true, unique: true},
@@ -9,4 +10,4 @@ const Post = new mongoose.Schema({
 })
 
 //third variable responsible for the name of the collection
-export default mongoose.model('Post', Post, 'pilot_names');
+export default mongoose.model('Post', Post, dbCollectionName);
