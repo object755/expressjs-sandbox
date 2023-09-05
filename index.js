@@ -4,7 +4,7 @@ import router from './router.js'
 import { PORT, DB_URL, POST_ALL_PROFILES_PATH, CRUD_PATH, GET_API_URL } from './serverData.js'
 import fileUpload from 'express-fileupload'
 import {fileURLToPath} from "url";
-import path from "path";
+import path from "path"; 
 
 const app = express();
 
@@ -20,10 +20,17 @@ app.use(express.json())
 app.use(fileUpload({}))
 app.use('/api', router)
 
-app.get('/', (req, res) =>{
-    console.log(req.query)
-    res.status(200).json(`Server works like a charm ✅`)
-})
+// app.get('/', (req, res) =>{
+//     console.log(req.query)
+//     res.status(200).json(`Server works like a charm ✅`)
+// })
+
+app.use(express.static('public'));
+
+// Handle requests for the root URL ("/") and serve the index.html file
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 async function startApp() {
     try {
