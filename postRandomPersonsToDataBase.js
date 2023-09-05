@@ -2,24 +2,8 @@ import { PORT, POST_ALL_PROFILES_PATH, GET_API_URL } from "./serverData.js";
 import { pilotsManager } from "./pilotsManager.js";
 
 let postUrl = GET_API_URL(PORT, POST_ALL_PROFILES_PATH);
-console.log(`----------------------------------------------------`)
-console.log(`VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV`)
 
-export default function postAllProfilesToDataBase() {
-    // for (let i = 0; i < 3; i++) {
-    //     dbCollectionName = dbCollectionName+1
-        
-    //     Object.entries(pilotsManager).forEach(pilot => {
-    //         let [pilotName, pilotData] = pilot;
-    
-    //         let {country, city, socials} = pilotData
-            
-    //         postProfileData(pilotName, country, city, socials)
-            
-    //         console.log(`${country} ${pilotName} ${city} ${socials}`)
-    //     }) 
-    // }
-   
+export default function postRandomPersonsToDataBase() {   
     Object.entries(pilotsManager).forEach(pilot => {
         let [pilotName, pilotData] = pilot;
 
