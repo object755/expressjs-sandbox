@@ -4,7 +4,7 @@ import postAllProfilesToDataBase from './postAllProfilesToDataBase.js'
 import { CRUD_PATH, POST_ALL_PROFILES_PATH } from './serverData.js';
 
 
-const router = new Router()
+const router = new Router();
 
 router.post(`/${CRUD_PATH}`, PostController.create)
 router.post(`/${POST_ALL_PROFILES_PATH}`, PostController.create)

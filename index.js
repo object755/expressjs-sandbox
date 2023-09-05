@@ -3,8 +3,18 @@ import mongoose from 'mongoose'
 import router from './router.js'
 import { PORT, DB_URL, POST_ALL_PROFILES_PATH, CRUD_PATH, GET_API_URL } from './serverData.js'
 import fileUpload from 'express-fileupload'
+import {fileURLToPath} from "url";
+import path from "path";
 
 const app = express();
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// const STATIC = path.join(__dirname, '../static/');
+// const HTML_FILE_PRIMARY = path.join(STATIC, 'index.html');
+
+// const app = express.static(STATIC);
 
 app.use(express.json())
 app.use(fileUpload({}))
