@@ -3,7 +3,8 @@ import { pilotsManager } from "./pilotsManager.js";
 import {dbCollectionName} from './serverData.js';
 
 let postUrl = GET_API_URL(PORT, POST_ALL_PROFILES_PATH);
-console.log(`---------------------------------------------------- `)
+console.log(`----------------------------------------------------`)
+console.log(`VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV`)
 
 export default function postAllProfilesToDataBase() {
     // for (let i = 0; i < 3; i++) {
@@ -19,7 +20,7 @@ export default function postAllProfilesToDataBase() {
     //         console.log(`${country} ${pilotName} ${city} ${socials}`)
     //     }) 
     // }
-
+   
     Object.entries(pilotsManager).forEach(pilot => {
         let [pilotName, pilotData] = pilot;
 
