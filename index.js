@@ -3,8 +3,6 @@ import mongoose from 'mongoose'
 import router from './router.js'
 import { PORT, DB_URL, POST_ALL_PROFILES_PATH, CRUD_PATH, GET_API_URL } from './serverData.js'
 import fileUpload from 'express-fileupload'
-import {fileURLToPath} from "url";
-import path from "path"; 
 
 const app = express();
 

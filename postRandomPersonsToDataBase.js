@@ -3,16 +3,22 @@ import { pilotsManager } from "./pilotsManager.js";
 
 let postUrl = GET_API_URL(PORT, POST_ALL_PROFILES_PATH);
 
-export default function postRandomPersonsToDataBase() {   
-    Object.entries(pilotsManager).forEach(pilot => {
-        let [pilotName, pilotData] = pilot;
+export default async function postRandomPersonsToDataBase(quantity = 5) {
+    let generatedProfiles = []
+    for (let i = 0; i < quantity; i++) {
+        let profileData = await getRandomProfile()
+        generatedProfiles.push(profileData);
+    }
 
-        let {country, city, socials} = pilotData
+    generatedProfiles.forEach(profile => {
+        let name = `${profile.name.first} ${profile.name.last}`;
+        let country = `${profile.location.country}`;
+        let city = `${profile.location.city}`;
+        let social = `${profile.email}`
         
-        postProfileData(pilotName, country, city, socials)
-        
-        console.log(`${country} ${pilotName} ${city} ${socials}`)
-    }) 
+        postProfileData(name, country, city, social);
+        console.log(`${country} ${name} ${city} ${social}`)
+    })
 }
 
 function postProfileData(profileName, country, city, social, avatar = '') {
@@ -35,3 +41,11 @@ function postProfileData(profileName, country, city, social, avatar = '') {
         .then(data => console.log(data))
         .catch(error => console.error("Error:", error))
 }
+
+async function getRandomProfile() {
+    let response = await fetch('https://randomuser.me/api');
+    let userData = await response.json();
+
+    return userData.results[0];
+}
+
