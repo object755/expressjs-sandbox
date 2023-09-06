@@ -1,7 +1,5 @@
-import { PORT, POST_ALL_PROFILES_PATH, GET_API_URL } from "./serverData.js";
-import { pilotsManager } from "./pilotsManager.js";
-
-let postUrl = GET_API_URL(PORT, POST_ALL_PROFILES_PATH);
+import { PORT, POST_RANDOM_PROFILES_PATH } from "./serverData.js";
+import postProfileData from "./postProfileData.js"
 
 export default async function postRandomPersonsToDataBase(quantity = 5) {
     let generatedProfiles = []
@@ -15,31 +13,11 @@ export default async function postRandomPersonsToDataBase(quantity = 5) {
         let country = `${profile.location.country}`;
         let city = `${profile.location.city}`;
         let social = `${profile.email}`
-        
-        postProfileData(name, country, city, social);
-        console.log(`${country} ${name} ${city} ${social}`)
-    })
-}
 
-function postProfileData(profileName, country, city, social, avatar = '') {
-    const data = {
-        pilotName: profileName,
-        city: city,
-        country: country,
-        social: social,
-        avatar: avatar,
-    };
-
-    fetch(postUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        postProfileData(PORT, POST_RANDOM_PROFILES_PATH, name, country, city, social);
+        console.log(`${country} ${name} ${city} ${social}`);
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error("Error:", error))
+    return generatedProfiles;
 }
 
 async function getRandomProfile() {

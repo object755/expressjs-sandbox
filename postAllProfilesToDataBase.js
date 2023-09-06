@@ -1,7 +1,7 @@
-import { PORT, POST_ALL_PROFILES_PATH, GET_API_URL } from "./serverData.js";
+import { PORT, POST_ALL_PROFILES_PATH } from "./serverData.js";
+import postProfileData from "./postProfileData.js";
 import { pilotsManager } from "./pilotsManager.js";
 
-let postUrl = GET_API_URL(PORT, POST_ALL_PROFILES_PATH);
 console.log(`----------------------------------------------------`)
 console.log(`VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV`)
 
@@ -11,29 +11,9 @@ export default function postAllProfilesToDataBase() {
 
         let {country, city, socials} = pilotData
         
-        postProfileData(pilotName, country, city, socials)
+        postProfileData(PORT, POST_ALL_PROFILES_PATH, pilotName, country, city, socials)
         
         console.log(`${country} ${pilotName} ${city} ${socials}`)
-    }) 
-}
-
-function postProfileData(profileName, country, city, social, avatar = '') {
-    const data = {
-        pilotName: profileName,
-        city: city,
-        country: country,
-        social: social,
-        avatar: avatar,
-    };
-
-    fetch(postUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error("Error:", error))
+    return pilotsManager;
 }
