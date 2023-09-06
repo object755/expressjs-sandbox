@@ -18,6 +18,8 @@ router.get(`/${CRUD_PATH}/:id`, PostController.getOne);
 router.put(`/${CRUD_PATH}`, PostController.update);
 router.delete(`/${CRUD_PATH}/:id`, PostController.delete);
 
+router.get("/search", PostController.searchByName);
+
 router.get(`/${POST_ALL_PROFILES_PATH}`, async (req, res) => {
   try {
     const postedData = await postAllProfilesToDataBase();

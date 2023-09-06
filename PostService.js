@@ -34,6 +34,16 @@ class PostService {
     const post = await Post.findByIdAndDelete(id);
     return post;
   }
+
+  async searchByName(pilotName) {
+    try {
+      const regex = new RegExp(pilotName, "i");
+      const posts = await Post.find({ pilotName: { $regex: regex } });
+      return posts;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 export default new PostService();

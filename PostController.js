@@ -48,6 +48,24 @@ class PostController {
       res.status(500).json(e);
     }
   }
+
+  async searchByName(req, res) {
+    try {
+      const { pilotName } = req.query;
+      console.log(req);
+
+      if (!pilotName) {
+        return res
+          .status(400)
+          .json({ error: "Name parameter is required for searching." });
+      }
+
+      const posts = await PostService.searchByName(pilotName);
+      return res.json(posts);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
 }
 
 export default new PostController();
