@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
           searchResultsDiv.textContent = "No results found.";
         } else {
           searchResultsDiv.textContent = "";
-          data.forEach((result) => {
+          data.forEach((result, i) => {
             const resultItem = document.createElement("div");
-            resultItem.textContent = result.pilotName;
+            resultItem.textContent = `${i+1}. ${result.pilotName}`;
             searchResultsDiv.appendChild(resultItem);
           });
         }
