@@ -24,7 +24,7 @@ router.get(`/${POST_ALL_PROFILES_PATH}`, async (req, res) => {
   try {
     const postedData = await postAllProfilesToDataBase();
     const JSONdata = JSON.stringify(postedData, null, 2);
-    res.send(`<pre>${JSONdata}</pre>`);
+    res.send(`${JSONdata}`);
   } catch (error) {
     res.status(500).send("An error occurred");
   }
@@ -34,7 +34,7 @@ router.get(`/${POST_RANDOM_PROFILES_PATH}`, async (req, res) => {
   try {
     const postedData = await postRandomPersonsToDataBase();
     const JSONdata = JSON.stringify(postedData, null, 2);
-    res.send(`<pre>${JSONdata}</pre>`);
+    res.send(`${JSONdata}`);
   } catch (error) {
     res.status(500).send("An error occurred");
   }

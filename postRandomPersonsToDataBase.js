@@ -1,7 +1,7 @@
 import { PORT, POST_RANDOM_PROFILES_PATH } from "./serverData.js";
 import postProfileData from "./postProfileData.js";
 
-export default async function postRandomPersonsToDataBase(quantity = 25) {
+export default async function postRandomPersonsToDataBase(quantity = 15) {
   let generatedProfiles = [];
   for (let i = 0; i < quantity; i++) {
     let profileData = await getRandomProfile();
