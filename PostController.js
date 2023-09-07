@@ -52,8 +52,6 @@ class PostController {
   async searchByName(req, res) {
     try {
       const { pilotName } = req.query;
-      console.log(req);
-
       if (!pilotName) {
         return res
           .status(400)

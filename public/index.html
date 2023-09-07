@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <!--suppress HtmlUnknownTarget -->
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
-        <form action="/api/postAllProfiles">
-            <button type="submit">post all profiles</button>
-         </form>
-        <form action="/api/postRandomProfiles">
-            <button type="submit">post 10 random profiles</button>
-        </form>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <form action="/api/postAllProfiles">
+      <button type="submit">post all profiles</button>
+    </form>
+    <form action="/api/postRandomProfiles">
+      <button type="submit">post 10 random profiles</button>
+    </form>
+    <form id="searchBar">
+      <input type="text" id="searchName" name="pilotName" />
+      <button type="submit">search by name</button>
+    </form>
+    <button onclick="console.log(counter())">calc</button>
+    <div id="searchResults"></div>
+    <script src="main.js"></script>
+  </body>
 </html>
