@@ -1,7 +1,7 @@
 import { PORT, POST_RANDOM_PROFILES_PATH } from "./serverData.js";
 import postProfileData from "./postProfileData.js";
 
-export default async function postRandomPersonsToDataBase(quantity = 5) {
+export default async function postRandomPersonsToDataBase(quantity = 25) {
   let generatedProfiles = [];
   for (let i = 0; i < quantity; i++) {
     let profileData = await getRandomProfile();
@@ -9,7 +9,7 @@ export default async function postRandomPersonsToDataBase(quantity = 5) {
   }
 
   generatedProfiles.forEach((profile) => {
-    let name = `${profile.name.first} ${profile.name.last}`;
+    let fullName = `${profile.name.first} ${profile.name.last}`;
     let country = `${profile.location.country}`;
     let city = `${profile.location.city}`;
     let social = `${profile.email}`;
@@ -17,12 +17,10 @@ export default async function postRandomPersonsToDataBase(quantity = 5) {
     postProfileData(
       PORT,
       POST_RANDOM_PROFILES_PATH,
-      name,
-      country,
-      city,
-      social
+      fullName,
+      profile
     );
-    console.log(`${country} ${name} ${city} ${social}`);
+    console.log(`${country} ${fullName} ${city} ${social}`);
   });
   return generatedProfiles;
 }

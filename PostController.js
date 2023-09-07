@@ -1,4 +1,3 @@
-import Post from "./Post.js";
 import PostService from "./PostService.js";
 
 class PostController {
@@ -51,14 +50,14 @@ class PostController {
 
   async searchByName(req, res) {
     try {
-      const { pilotName } = req.query;
-      if (!pilotName) {
+      const { fullName } = req.query;
+      if (!fullName) {
         return res
           .status(400)
           .json({ error: "Name parameter is required for searching." });
       }
 
-      const posts = await PostService.searchByName(pilotName);
+      const posts = await PostService.searchByName(fullName);
       return res.json(posts);
     } catch (e) {
       res.status(500).json(e);

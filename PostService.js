@@ -35,10 +35,10 @@ class PostService {
     return post;
   }
 
-  async searchByName(pilotName) {
+  async searchByName(fullName) {
     try {
-      const regex = new RegExp(pilotName, "i");
-      const posts = await Post.find({ pilotName: { $regex: regex } });
+      const regex = new RegExp(fullName, "i");
+      const posts = await Post.find({ fullName: { $regex: regex } });
       return posts;
     } catch (e) {
       throw e;
