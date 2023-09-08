@@ -25,5 +25,5 @@ dist-ssr
 
 server/data/credentials.js
 intermediateData.js
-src/pilotsManager.js
+server/data/pilotsManager.js
 seriesData.js
