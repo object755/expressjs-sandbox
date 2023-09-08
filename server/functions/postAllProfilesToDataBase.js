@@ -1,6 +1,6 @@
-import { PORT, POST_ALL_PROFILES_PATH } from "./serverData.js";
+import { PORT, POST_ALL_PROFILES_PATH } from "../data/serverData.js";
 import postProfileData from "./postProfileData.js";
-import { pilotsManager } from "../src/pilotsManager.js";
+import { pilotsManager } from "../../src/pilotsManager.js";
 
 console.log(`----------------------------------------------------`);
 console.log(`VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV`);

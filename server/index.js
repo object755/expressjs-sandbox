@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import router from "./router.js";
-import { PORT, DB_URL, DB_RANDOM_PROFILES_URL } from "./serverData.js";
+import { PORT, DB_URL, DB_RANDOM_PROFILES_URL } from "./data/serverData.js";
 import fileUpload from "express-fileupload";
 
 const app = express();

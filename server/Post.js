@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { dbRandomUsersCollection } from "./serverData.js";
+import { dbRandomUsersCollection } from "./data/serverData.js";
 
 // const Post = new mongoose.Schema({
 //   name: { type: String, required: true, unique: true },

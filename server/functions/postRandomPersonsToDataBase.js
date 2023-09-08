@@ -1,4 +1,4 @@
-import { PORT, POST_RANDOM_PROFILES_PATH } from "./serverData.js";
+import { PORT, POST_RANDOM_PROFILES_PATH } from "../data/serverData.js";
 import postProfileData from "./postProfileData.js";
 
 export default async function postRandomPersonsToDataBase(quantity = 15) {

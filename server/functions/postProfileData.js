@@ -1,4 +1,4 @@
-import { GET_API_URL } from "./serverData.js";
+import { GET_API_URL } from "../data/serverData.js";
 
 export default function postProfileData(
   port,

@@ -1,12 +1,12 @@
 import Router from "express";
 import PostController from "./PostController.js";
-import postAllProfilesToDataBase from "./postAllProfilesToDataBase.js";
-import postRandomPersonsToDataBase from "./postRandomPersonsToDataBase.js";
+import postAllProfilesToDataBase from "./functions/postAllProfilesToDataBase.js";
+import postRandomPersonsToDataBase from "./functions/postRandomPersonsToDataBase.js";
 import {
   CRUD_PATH,
   POST_ALL_PROFILES_PATH,
   POST_RANDOM_PROFILES_PATH,
-} from "./serverData.js";
+} from "./data/serverData.js";
 
 const router = new Router();
 

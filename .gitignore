@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-server/credentials.js
+server/data/credentials.js
 intermediateData.js
 src/pilotsManager.js
 seriesData.js
