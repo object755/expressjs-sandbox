@@ -16,9 +16,8 @@ function searchHandler(event) {
   if (!searchName) return;
   fetch(`/api/search?fullName=${searchName}`)
     .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      if (!response.ok) throw new Error("Network response was not ok");
+
       return response.json();
     })
     .then((data) => {
@@ -45,28 +44,31 @@ function addRandomUsersHandler(event) {
 
   fetch("/api/postRandomProfiles")
     .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      if (!response.ok) throw new Error("Network response was not ok");
+
       return response.json();
     })
     .then((data) => {
       if (data.length === 0) {
         userActionsDiv.textContent = "No results found.";
+
       } else {
-        if (!lastActionIsAddingRandomUsers) {
-          userActionsDiv.textContent = "";
-        }
+        if (!lastActionIsAddingRandomUsers) userActionsDiv.textContent = "";
         
         lastActionIsAddingRandomUsers = true;
 
-        data.forEach((result, i) => {
-          console.log(result);
+        data.forEach(result => {
           const resultItem = document.createElement("div");
-          resultItem.textContent = `${userActionsDiv.children.length + 1}. ${
-            result.name.first
-          } ${result.name.last}`;
-          userActionsDiv.appendChild(resultItem);
+
+          let count = userActionsDiv.children.length + 1
+          let fullName = `${result.name.first} ${result.name.last}`
+          let picture = result?.picture?.thumbnail || "";
+
+          resultItem.textContent = `${count}. ${fullName}`;
+
+          let div = `<div>${count}. <img src="${picture}" alt="${fullName}"> ${fullName}</div>`
+
+          userActionsDiv.innerHTML += div;
         });
       }
     })

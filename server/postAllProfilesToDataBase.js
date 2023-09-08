@@ -1,6 +1,6 @@
 import { PORT, POST_ALL_PROFILES_PATH } from "./serverData.js";
 import postProfileData from "./postProfileData.js";
-import { pilotsManager } from "./pilotsManager.js";
+import { pilotsManager } from "../src/pilotsManager.js";
 
 console.log(`----------------------------------------------------`);
 console.log(`VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV`);
@@ -20,7 +20,7 @@ export default function postAllProfilesToDataBase() {
       socials
     );
 
-    console.log(`${country} ${pilotName} ${city} ${socials}`);
+    console.log(`${country} ${pilotName} ${city} ${socials}`)
   });
   return pilotsManager;
 }

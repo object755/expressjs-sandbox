@@ -29,4 +29,4 @@ async function startApp() {
   }
 }
 
-startApp();
+startApp()
