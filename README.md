@@ -1,6 +1,6 @@
 Project structure
 
-
+```
 📦Project
  ┣ 📂public
  ┃ ┣ 📜index.html
@@ -30,3 +30,4 @@ Project structure
  ┣ 📜package.json
  ┣ 📜README.md
  ┗ 📜tailwind.config.js
+```
