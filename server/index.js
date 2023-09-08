@@ -3,6 +3,13 @@ import mongoose from "mongoose";
 import router from "./router.js";
 import { PORT, DB_URL, DB_RANDOM_PROFILES_URL } from "./data/serverData.js";
 import fileUpload from "express-fileupload";
+import path from 'path';
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 
@@ -14,7 +21,8 @@ app.use(express.static("public"));
 
 // Handle requests for the root URL ("/") and serve the index.html file
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  const indexPath = path.resolve(__dirname, '../public/index.html');
+  res.sendFile(indexPath);
 });
 
 async function startApp() {
