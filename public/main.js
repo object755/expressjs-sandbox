@@ -27,9 +27,8 @@ function searchHandler(event) {
         userActionsDiv.textContent = "";
         lastActionIsAddingRandomUsers = false;
         data.forEach((result, i) => {
-          const resultItem = document.createElement("div");
-          resultItem.textContent = `${i + 1}. ${result.fullName}`;
-          userActionsDiv.appendChild(resultItem);
+          let div = `<div class="flex content-center">${i + 1}. ${result.fullName}</div>`;
+          userActionsDiv.innerHTML += div;
         });
       }
     })
@@ -51,22 +50,21 @@ function addRandomUsersHandler(event) {
     .then((data) => {
       if (data.length === 0) {
         userActionsDiv.textContent = "No results found.";
-
       } else {
         if (!lastActionIsAddingRandomUsers) userActionsDiv.textContent = "";
-        
+
         lastActionIsAddingRandomUsers = true;
 
-        data.forEach(result => {
+        data.forEach((result) => {
           const resultItem = document.createElement("div");
 
-          let count = userActionsDiv.children.length + 1
-          let fullName = `${result.name.first} ${result.name.last}`
+          let count = userActionsDiv.children.length + 1;
+          let fullName = `${result.name.first} ${result.name.last}`;
           let picture = result?.picture?.thumbnail || "";
 
           resultItem.textContent = `${count}. ${fullName}`;
 
-          let div = `<div>${count}. <img src="${picture}" alt="${fullName}"> ${fullName}</div>`
+          let div = `<div class="flex content-center">${count}. <img src="${picture}" alt="${fullName}"> ${fullName}</div>`;
 
           userActionsDiv.innerHTML += div;
         });

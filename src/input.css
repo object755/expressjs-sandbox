@@ -1,14 +1,17 @@
+/** @type {import('tailwindcss').Config} */
+
 .helloThere {
     display: block;
 }
 
-.General-Kenobi {
-
+.my-class {
+    display: block;
+    position: absolute;
 }
 /*
 npm install -D tailwindcss
 
 npx tailwindcss init
 
-npx tailwindcss -i ./src/input.css -o ../public/style.css --watch
+npx tailwindcss -i ./src/input.css -o ./public/style.css --watch
 */
