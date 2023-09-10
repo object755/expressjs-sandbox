@@ -27,7 +27,7 @@ function searchHandler(event) {
         userActionsDiv.textContent = "";
         lastActionIsAddingRandomUsers = false;
         data.forEach((result, i) => {
-          let div = `<div class="flex content-center">${i + 1}. ${result.fullName}</div>`;
+          let div = `<div class="flex items-center h-50 w-full font-mono text-xl p-2">${i + 1}. ${result.fullName}</div>`;
           userActionsDiv.innerHTML += div;
         });
       }
@@ -64,7 +64,7 @@ function addRandomUsersHandler(event) {
 
           resultItem.textContent = `${count}. ${fullName}`;
 
-          let div = `<div class="flex content-center">${count}. <img src="${picture}" alt="${fullName}"> ${fullName}</div>`;
+          let div = `<div class="flex items-center h-50 w-full font-mono text-xl" >${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
 
           userActionsDiv.innerHTML += div;
         });
