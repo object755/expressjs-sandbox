@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import router from "./router.js";
-import { PORT, DB_URL, DB_RANDOM_PROFILES_URL } from "./data/serverData.js";
+import { PORT, dbRandomProfiles, GET_DB_URL_CONNECT } from "./data/serverData.js";
+import { CREDENTIALS } from "./data/credentials.js";
 import fileUpload from "express-fileupload";
 import path from 'path';
 
@@ -27,7 +28,10 @@ app.get("/", (req, res) => {
 
 async function startApp() {
   try {
-    await mongoose.connect(DB_RANDOM_PROFILES_URL, {
+    let credentials = CREDENTIALS || null
+    const DB_URL = await GET_DB_URL_CONNECT(credentials, dbRandomProfiles);
+
+    await mongoose.connect(DB_URL, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
