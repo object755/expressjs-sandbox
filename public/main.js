@@ -9,10 +9,27 @@ document.addEventListener("DOMContentLoaded", function () {
 const userActionsDiv = document.getElementById("userActions");
 let lastActionIsAddingRandomUsers = false;
 
-function searchHandler(event) {
+let loaderTitle = document.querySelector(".loader_title")
+
+async function searchHandler(event) {
   event.preventDefault();
 
   const searchName = document.getElementById("searchName").value;
+
+  if (searchName === "") {
+    userActionsDiv.textContent = "Search input is empty, return";
+    return;
+  }
+
+  if (lastActionIsAddingRandomUsers) userActionsDiv.textContent = "";
+  
+  loaderTitle.innerHTML = 'Searching...';
+  
+  toggleLoader();
+
+  // await delay(30000);
+  console.log('fetching...')
+
   if (!searchName) return;
   fetch(`/api/search?fullName=${searchName}`)
     .then((response) => {
@@ -27,10 +44,14 @@ function searchHandler(event) {
         userActionsDiv.textContent = "";
         lastActionIsAddingRandomUsers = false;
         data.forEach((result, i) => {
-          let div = `<div class="flex items-center h-50 w-full font-mono text-xl p-2">${i + 1}. ${result.fullName}</div>`;
+          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl p-2">${
+            i + 1
+          }. ${result.fullName}</div>`;
           userActionsDiv.innerHTML += div;
         });
       }
+
+      toggleLoader();
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -40,6 +61,14 @@ function searchHandler(event) {
 
 function addRandomUsersHandler(event) {
   event.preventDefault();
+
+  if (!lastActionIsAddingRandomUsers) userActionsDiv.textContent = "";
+
+  lastActionIsAddingRandomUsers = true;
+
+  loaderTitle.innerHTML = 'Generating new profiles and loading to DB...';
+
+  toggleLoader();
 
   fetch("/api/postRandomProfiles")
     .then((response) => {
@@ -51,10 +80,6 @@ function addRandomUsersHandler(event) {
       if (data.length === 0) {
         userActionsDiv.textContent = "No results found.";
       } else {
-        if (!lastActionIsAddingRandomUsers) userActionsDiv.textContent = "";
-
-        lastActionIsAddingRandomUsers = true;
-
         data.forEach((result) => {
           const resultItem = document.createElement("div");
 
@@ -64,14 +89,30 @@ function addRandomUsersHandler(event) {
 
           resultItem.textContent = `${count}. ${fullName}`;
 
-          let div = `<div class="flex items-center h-50 w-full font-mono text-xl" >${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
+          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl" >${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
 
           userActionsDiv.innerHTML += div;
         });
       }
+
+      toggleLoader();
     })
     .catch((error) => {
       console.error("Error:", error);
       userActionsDiv.textContent = "An error occurred during the search.";
     });
+}
+
+function toggleLoader() {
+  const profilesLoader = document.querySelector("#profilesLoader");
+
+  let isHidden = profilesLoader.classList.contains("hidden");
+
+  isHidden
+    ? profilesLoader.classList.remove("hidden")
+    : profilesLoader.classList.add("hidden");
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

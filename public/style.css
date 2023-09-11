@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -546,6 +550,14 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -554,12 +566,38 @@ video {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.w-3\/5 {
+  width: 60%;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
 .w-96 {
   width: 24rem;
 }
 
 .w-full {
   width: 100%;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 .appearance-none {
@@ -584,12 +622,16 @@ video {
   border-width: 1px;
 }
 
-.p-5 {
-  padding: 1.25rem;
+.fill-blue-600 {
+  fill: #2563eb;
 }
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .px-3 {
@@ -622,6 +664,11 @@ video {
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .text-gray-700 {
@@ -692,4 +739,11 @@ npx tailwindcss -i ./src/input.css -o ./public/style.css --watch
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
 }
