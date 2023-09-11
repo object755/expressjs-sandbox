@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const userActionsDiv = document.getElementById("userActions");
 let lastActionIsAddingRandomUsers = false;
 
-let loaderTitle = document.querySelector(".loader_title")
+let loaderTitle = document.querySelector(".loader_title");
 
 async function searchHandler(event) {
   event.preventDefault();
@@ -22,13 +22,13 @@ async function searchHandler(event) {
   }
 
   if (lastActionIsAddingRandomUsers) userActionsDiv.textContent = "";
-  
-  loaderTitle.innerHTML = 'Searching...';
-  
+
+  loaderTitle.innerHTML = "Searching...";
+
   toggleLoader();
 
   // await delay(30000);
-  console.log('fetching...')
+  console.log("fetching...");
 
   if (!searchName) return;
   fetch(`/api/search?fullName=${searchName}`)
@@ -44,10 +44,12 @@ async function searchHandler(event) {
         userActionsDiv.textContent = "";
         lastActionIsAddingRandomUsers = false;
         data.forEach((result, i) => {
-          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl p-2">${
-            i + 1
-          }. ${result.fullName}</div>`;
+          let div = `
+            <div class="profile_bar flex items-center h-50 w-full font-mono text-xl p-2">
+              ${i + 1}. ${result.fullName}<span class="text-gray-400 ml-1">[${result.phone}]<span>
+            </div>`;
           userActionsDiv.innerHTML += div;
+          console.log(result);
         });
       }
 
@@ -66,7 +68,7 @@ function addRandomUsersHandler(event) {
 
   lastActionIsAddingRandomUsers = true;
 
-  loaderTitle.innerHTML = 'Generating new profiles and loading to DB...';
+  loaderTitle.innerHTML = "Generating new profiles and loading to DB...";
 
   toggleLoader();
 
@@ -87,9 +89,14 @@ function addRandomUsersHandler(event) {
           let fullName = `${result.name.first} ${result.name.last}`;
           let picture = result?.picture?.thumbnail || "";
 
+          console.log(result);
+
           resultItem.textContent = `${count}. ${fullName}`;
 
-          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl" >${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
+          let div = `
+            <div class="profile_bar flex items-center h-50 w-full font-mono text-xl">
+              ${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}
+            </div>`;
 
           userActionsDiv.innerHTML += div;
         });
