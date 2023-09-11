@@ -82,23 +82,20 @@ function addRandomUsersHandler(event) {
       if (data.length === 0) {
         userActionsDiv.textContent = "No results found.";
       } else {
-        data.forEach((result) => {
-          const resultItem = document.createElement("div");
+        data.forEach((result, i) => {
+          setTimeout( () => {
+            const resultItem = document.createElement("div");
 
           let count = userActionsDiv.children.length + 1;
           let fullName = `${result.name.first} ${result.name.last}`;
           let picture = result?.picture?.thumbnail || "";
 
-          console.log(result);
+            resultItem.textContent = `${count}. ${fullName}`;
 
-          resultItem.textContent = `${count}. ${fullName}`;
+          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl" >${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
 
-          let div = `
-            <div class="profile_bar flex items-center h-50 w-full font-mono text-xl">
-              ${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}
-            </div>`;
-
-          userActionsDiv.innerHTML += div;
+            userActionsDiv.innerHTML += div;
+          }, 0+(i*25))
         });
       }
 
