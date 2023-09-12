@@ -1,3 +1,5 @@
+import countryFlags from "/countryFlags.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("#searchBar");
   const button = document.querySelector("#addRandomUsers");
@@ -44,9 +46,19 @@ async function searchHandler(event) {
         userActionsDiv.textContent = "";
         lastActionIsAddingRandomUsers = false;
         data.forEach((result, i) => {
+          let fullName = result.fullName;
+          let phoneNumber = result.phone;
+          let country = countryFlags.find(countryObj => countryObj.label === result?.location?.country)
+          
+          let countryFlagImg = `https://flagcdn.com/w20/${country.code.toLowerCase()}.png`
+          
           let div = `
             <div class="profile_bar flex items-center h-50 w-full font-mono text-xl p-2">
-              ${i + 1}. ${result.fullName}<span class="text-gray-400 ml-1">[${result.phone}]<span>
+              <img class="mr-2" src="${countryFlagImg}"/>
+              ${i + 1}. ${fullName}
+                <span class="text-gray-400 ml-1">
+                  [${phoneNumber}]
+                <span>
             </div>`;
           userActionsDiv.innerHTML += div;
           console.log(result);
@@ -58,6 +70,8 @@ async function searchHandler(event) {
     .catch((error) => {
       console.error("Error:", error);
       userActionsDiv.textContent = "An error occurred during the search.";
+
+      toggleLoader();
     });
 }
 
@@ -92,7 +106,7 @@ function addRandomUsersHandler(event) {
 
             resultItem.textContent = `${count}. ${fullName}`;
 
-          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl" >${count}. <img class="m-2" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
+          let div = `<div class="profile_bar flex items-center h-50 w-full font-mono text-xl" ><img class="m-2 w-10 h-10 rounded-full" src="${picture}" alt="${fullName}"> ${fullName}</div>`;
 
             userActionsDiv.innerHTML += div;
           }, 0+(i*25))
@@ -104,6 +118,8 @@ function addRandomUsersHandler(event) {
     .catch((error) => {
       console.error("Error:", error);
       userActionsDiv.textContent = "An error occurred during the search.";
+
+      toggleLoader();
     });
 }
 
