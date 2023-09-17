@@ -9,7 +9,6 @@ export default {
     extend: {},
   },
   plugins: [
-    require('tailwindcss'),
-    // require('autoprefixer'),
+    require('tailwindcss')
   ],
 };

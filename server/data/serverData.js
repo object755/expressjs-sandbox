@@ -39,7 +39,6 @@ export const GET_DB_URL_CONNECT = async (
     ]);
     [username, password] = [answers.username, answers.password];
   }
-//   console.log(password, username)
 
   return `mongodb+srv://${username}:${password}@clustereu.wcfbshc.mongodb.net/${dbName}`;
 };
